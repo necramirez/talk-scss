@@ -1,22 +1,19 @@
 {
-  "name": "reveal.js",
-  "version": "3.4.1",
-  "description": "The HTML Presentation Framework",
-  "homepage": "http://lab.hakim.se/reveal-js",
-  "subdomain": "revealjs",
+  "name": "talk-scss",
+  "version": "1.0.0",
+  "description": "\"Lightning talk\" on SCSS",
   "main": "js/reveal.js",
   "scripts": {
     "test": "grunt test",
     "start": "grunt serve"
   },
   "author": {
-    "name": "Hakim El Hattab",
-    "email": "hakim.elhattab@gmail.com",
-    "web": "http://hakim.se"
+    "name": "Nikki Erwin Ramirez",
+    "email": "necramirez@gmail.com"
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/hakimel/reveal.js.git"
+    "url": "git://github.com/necramirez/talk-scss.git"
   },
   "engines": {
     "node": ">=4.0.0"

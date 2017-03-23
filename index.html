@@ -1,50 +1,302 @@
 <!doctype html>
 <html>
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-		<title>reveal.js</title>
+    <title>SCSS</title>
 
-		<link rel="stylesheet" href="css/reveal.css">
-		<link rel="stylesheet" href="css/theme/black.css">
+    <link rel="stylesheet" href="css/reveal.css">
+    <link rel="stylesheet" href="css/theme/black.css">
 
-		<!-- Theme used for syntax highlighting of code -->
-		<link rel="stylesheet" href="lib/css/zenburn.css">
+    <!-- Theme used for syntax highlighting of code -->
+    <link rel="stylesheet" href="lib/css/zenburn.css">
 
-		<!-- Printing and PDF exports -->
-		<script>
-			var link = document.createElement( 'link' );
-			link.rel = 'stylesheet';
-			link.type = 'text/css';
-			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
-			document.getElementsByTagName( 'head' )[0].appendChild( link );
-		</script>
-	</head>
-	<body>
-		<div class="reveal">
-			<div class="slides">
-				<section>Slide 1</section>
-				<section>Slide 2</section>
-			</div>
-		</div>
+    <!-- Printing and PDF exports -->
+    <script>
+      var link = document.createElement( 'link' );
+      link.rel = 'stylesheet';
+      link.type = 'text/css';
+      link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+      document.getElementsByTagName( 'head' )[0].appendChild( link );
+    </script>
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+        <section data-markdown>
+          <script type="text/template">
+            # SCSS
 
-		<script src="lib/js/head.min.js"></script>
-		<script src="js/reveal.js"></script>
+            ⚡ Lightning Talk ⚡
+          </script>
+        </section>
 
-		<script>
-			// More info https://github.com/hakimel/reveal.js#configuration
-			Reveal.initialize({
-				history: true,
+        <section data-markdown>
+          <script type="text/template">
+            # SCSS
 
-				// More info https://github.com/hakimel/reveal.js#dependencies
-				dependencies: [
-					{ src: 'plugin/markdown/marked.js' },
-					{ src: 'plugin/markdown/markdown.js' },
-					{ src: 'plugin/notes/notes.js', async: true },
-					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
-				]
-			});
-		</script>
-	</body>
+            - "Core Benefits"
+            - Notable features
+              - Variables
+              - Extend
+              - Functions
+              - Mixins
+          </script>
+        </section>
+
+        <section data-markdown>
+          <script type="text/template">
+            **SCSS**
+
+            ## Allows us to
+
+            - Avoid magic numbers
+            - Do calculations
+            - Do color operations
+              - `lighten()` / `darken()`
+            - Use nesting
+              - `&`, current selector reference
+                - Parent selector
+          </script>
+        </section>
+
+        <section data-markdown>
+          <script type="text/template">
+            **SCSS**
+
+            ## Notable features
+
+            - Variables
+            - Extend
+            - Functions
+            - Mixins
+          </script>
+        </section>
+
+        <section data-markdown>
+          <script type="text/template">
+            **SCSS**
+
+            ### Variables
+
+            - Use when
+              - the value is repeated at least twice
+              - the value is likely to be updated at least once
+              - all occurrences of the value are tied to the variable (i.e. not by coincidence)
+          </script>
+        </section>
+
+        <section data-markdown data-separator-vertical="^\n\n\n">
+          <script type="text/template">
+            **SCSS**
+
+            ### Variables
+
+            - `!default` flag
+              - allows a variable to be overwritten
+              - used when writing a library or framework
+
+
+
+            In `your-library.scss`:
+
+            ```scss
+            // Library declaration
+            $baseline: 1em !default;
+            ```
+
+
+
+            In `your-app.scss`:
+
+            ```scss
+            // Your own variable
+            $baseline: 2em;
+
+            // Your library declaring `$baseline`
+            @import 'your-library';
+
+            // Inside `your-library`, $baseline == 2em
+            ```
+          </script>
+        </section>
+
+        <section data-markdown data-separator-vertical="^\n\n\n">
+          <script type="text/template">
+            **SCSS**
+
+            ### Extend
+
+            - Recommendations
+              - Use with placeholders (e.g. `%my-placeholder`)
+              - If used with actual selectors, only extend selectors that are logically related
+
+
+
+            - Cons
+              - not possible across media contexts
+              - not flexible
+              - messes up ordering of rules
+                - [Watch Out for Selector Order](https://css-tricks.com/the-extend-concept/#article-header-id-7)
+                - See _Preserving source order_ section of [What Nobody Told You About Sass’s @extend](https://www.sitepoint.com/sass-extend-nobody-told-you/)
+              - groups together all extending selectors, so unrelated selectors might be grouped together
+
+
+
+            - Understand
+
+            From [When to use @extend](https://csswizardry.com/2014/11/when-to-use-extend-when-to-use-a-mixin/#when-to-use-extend):
+            > `@extend` creates relationships
+
+            > misusing `@extend` can create relationships around the wrong criterion
+          </script>
+        </section>
+
+        <section data-markdown>
+          <script type="text/template">
+            **SCSS**
+
+            ### Functions
+          </script>
+        </section>
+
+        <section data-markdown data-separator-vertical="^\n\n\n">
+          <script type="text/template">
+            **SCSS**
+
+            ### Mixins
+
+            - more flexible than `@extend`
+            - can have arguments
+              - with optional default values
+              - with names
+
+
+
+            ```scss
+            @mixin axa-button(
+              $button-bg-color: #777,
+              $button-text-color: #fff
+            ) {
+              background-color: $button-bg-color;
+              color: $button-text-color;
+            }
+            ```
+
+
+
+            ```scss
+            .quote-form {
+                .submit-button {
+                    // "normal" usage
+                    @include axa-button(#0f0);
+                }
+            }
+            ```
+
+
+
+            ```scss
+            .quote-form {
+                .cancel-button {
+                    // passing no arguments would use
+                    // the default parameter values
+                    @include axa-button;
+
+                    // same as doing this
+                    @include axa-button(#777, #fff);
+                }
+            }
+            ```
+
+
+
+            ```scss
+            .quote-form {
+                .ok-button {
+                    // using names makes it more readable
+                    @include axa-button(
+                      $button-bg-color: #00f,
+                      $button-text-color: #eee
+                    );
+
+                    // and allows you to skip some parameters
+                    @include axa-button(
+                      $button-text-color: #ff0
+                    );
+                }
+            }
+            ```
+
+
+
+            One popular example deals with vendor prefixes:
+
+            ```scss
+            @mixin border-radius($radius) {
+                -webkit-border-radius: $radius;
+                -moz-border-radius: $radius;
+                -ms-border-radius: $radius;
+                border-radius: $radius;
+            }
+
+            .box {
+                @include border-radius(10px);
+            }
+            ```
+          </script>
+        </section>
+
+        <section data-markdown>
+          <script type="text/template">
+            ## References
+
+            - [The Extend Concept](https://css-tricks.com/the-extend-concept/) by Chris Coyier, CSS-Tricks
+            - [Why You Should Avoid Sass @extend](https://www.sitepoint.com/avoid-sass-extend/) by Hugo Giraudel, Sass Guidelines
+            - [When to use @extend; when to use a mixin](https://csswizardry.com/2014/11/when-to-use-extend-when-to-use-a-mixin/) by Harry Roberts, CSS Wizardry
+            - [What Nobody Told You About Sass’s @extend](https://www.sitepoint.com/sass-extend-nobody-told-you/) by Hugo Giraudel, Sass Guidelines
+          </script>
+        </section>
+
+        <section data-markdown>
+          <script type="text/template">
+            ## Other CSS processors
+            - Post-processors
+                - [PostCSS](https://github.com/postcss/postcss)
+                    - [Autoprefixer](https://github.com/postcss/autoprefixer)
+          </script>
+        </section>
+
+        <section data-markdown>
+          <script type="text/template">
+            ⚡ END ⚡
+
+            🤓
+
+            - [Github repo](https://github.com/necramirez/talk-scss)
+            - [Markdown version](https://github.com/necramirez/talk-scss/blob/master/talk-scss.md)
+          </script>
+        </section>
+      </div>
+    </div>
+
+    <script src="lib/js/head.min.js"></script>
+    <script src="js/reveal.js"></script>
+
+    <script>
+      // More info https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        history: true,
+
+        // More info https://github.com/hakimel/reveal.js#dependencies
+        dependencies: [
+          { src: 'plugin/markdown/marked.js' },
+          { src: 'plugin/markdown/markdown.js' },
+          { src: 'plugin/notes/notes.js', async: true },
+          { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
+        ]
+      });
+    </script>
+  </body>
 </html>
